@@ -22,17 +22,24 @@ public class Sprite {
 	
 	float rotation = 0;
 	
-	Sprite(String[] files, boolean cycling) {
+	float depth;
+	
+	Sprite(String[] files, boolean cycling, int depth) {
 		this.cycling = cycling;
+		this.depth = depth;
 		textures = new ArrayList<Texture>();
 		for(String file : files) {
 			textures.add(loadTexture(file));
 		}
 		changeTexture(0);
 	}
+
+	Sprite(String file, int depth) {
+		this(new String[] { file }, false, depth);
+	}
 	
 	Sprite(String file) {
-		this(new String[] { file }, false);
+		this(new String[] { file }, false, 0);
 	}
 	
 	void draw(float x, float y, int w, int h) {

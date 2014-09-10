@@ -1,19 +1,21 @@
 package com.howlinteractive.obj;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Room {
-
+	
 	static float playerStartX = Game.width / 2, playerStartY = 200;
+	static Player p;
 	
 	ArrayList<Object> objs;
-	Player p;
 	
 	float scrollX, scrollY;
 	
 	Room() {
 		objs = new ArrayList<Object>();
-		objs.add(p = new Player(playerStartX, playerStartY));
+		if(p == null) { p = new Player(playerStartX, playerStartY); }
+		objs.add(p);
 	}
 	
 	Room(float playerStartX, float playerStartY, float scrollX, float scrollY) {
@@ -42,12 +44,21 @@ public class Room {
 	}
 	
 	void draw() {
+		rearrangeByDepth();
 		for(Object obj : objs) {
 			obj.draw();
 		}
 	}
 	
+	void rearrangeByDepth() {
+		Collections.sort(objs);
+	}
+	
 	void onTouch() {
 		
+	}
+	
+	static void drawLine(float x1, float y1, float x2, float y2) {
+		//TODO
 	}
 }

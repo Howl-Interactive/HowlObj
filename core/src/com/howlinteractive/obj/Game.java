@@ -29,14 +29,10 @@ public class Game extends ApplicationAdapter {
 		sB = new SpriteBatch();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
-		loadTextures();
 		rooms = new ArrayList<Room>();
 		rooms.add(new Room());
 		changeRoom(0);
-	}
-	
-	void loadTextures() {
-		
+		InputPanel.create();
 	}
 	
 	void handleInput() {
@@ -73,6 +69,6 @@ public class Game extends ApplicationAdapter {
 	}
 	
 	static void gameOver() {
-		
+		//TODO
 	}
 }

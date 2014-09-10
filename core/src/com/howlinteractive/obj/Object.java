@@ -2,7 +2,7 @@ package com.howlinteractive.obj;
 
 import java.util.ArrayList;
 
-public abstract class Object {
+public abstract class Object implements Comparable<Object> {
 
 	enum Type { NONE, SOLID, HAZARD, PLAYER }
 	abstract Type type();
@@ -112,7 +112,61 @@ public abstract class Object {
 		sprite.rotation = rotation;
 	}
 	
+	static Object collisionPoint(float x, float y, Type type) {
+		for(Object obj : Game.room.objs) {
+			if(obj.type() == type && collisionPoint(x, y, obj)) {
+				return obj;
+			}
+		}
+		return null;
+	}
+	
+	static boolean collisionPoint(float x, float y, Object obj) {
+		if(x > obj.x - obj.w / 2 && x < obj.x + obj.w / 2 && y > obj.y - obj.h / 2 && y < obj.y + obj.h / 2) {
+			return true;
+		}
+		return false;
+	}
+	
+	static boolean collisionLine(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
+		float denom = ((y4 - y3) * (x2 - x1)) -	((x4 - x3) * (y2 - y1));
+		if (denom == 0) {
+			return false;
+		}
+		else {
+			float ua = (((x4 - x3) * (y1 - y3)) - ((y4 - y3) * (x1 - x3))) / denom;
+			float ub = (((x2 - x1) * (y1 - y3)) - ((y2 - y1) * (x1 - x3))) / denom;
+			if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
+				return false;
+			}
+			return true;
+		}
+	}
+	
+	static boolean collisionLine(float x1, float y1, float x2, float y2, Object obj) {
+		for(int i = 0; i < 4; i++) {
+			if(collisionLine(x1, y1, x2, y2, obj.x + (i % 2 == 0 ? -1 : 1) * obj.w / 2, obj.y + (i < 2 ? -1 : 1), obj.x + (i + 1 % 2 == 0 ? -1 : 1) * obj.w / 2, obj.y + (i + 1 < 2 ? -1 : 1))) {
+				return true;
+			}
+		}		
+		return false;
+	}
+	
+	static Object collisionLine(float x1, float y1, float x2, float y2, Type type) {
+		for(Object obj : Game.room.objs) {
+			if(obj.type() == type && collisionLine(x1, y1, x2, y2, obj)) {
+				return obj;
+			}
+		}
+		return null;
+	}
+	
 	void draw() {
 		sprite.draw(x - w / 2, y - h / 2, w, h);
+	}
+
+	@Override
+	public int compareTo(Object obj) {
+		return sprite.depth == obj.sprite.depth ? 0 : 1;
 	}
 }

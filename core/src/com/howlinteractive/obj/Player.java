@@ -10,6 +10,21 @@ public class Player extends Object {
 	}
 	
 	@Override
+	void update() {
+		if(cooldown != 0) { cooldown--; }
+		super.update();
+	}
+	
+	int cooldown = 0;
+	final int FIRE_RATE = 20;
+	void shoot(float angle) {
+		if(cooldown == 0) {
+			//shoot
+			cooldown = FIRE_RATE;
+		}
+	}
+	
+	@Override
 	void collision(Type type) {
 		switch(type) {
 		case HAZARD:
