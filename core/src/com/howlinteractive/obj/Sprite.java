@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Sprite {
 
-	private static Hashtable<String, Texture> loadedTextures;
+	private static Hashtable<String, Texture> loadedTextures = new Hashtable<String, Texture>();
 	
 	private ArrayList<Texture> textures;
 	private int curTexture;
