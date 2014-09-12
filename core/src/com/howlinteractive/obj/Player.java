@@ -19,15 +19,21 @@ public class Player extends Object {
 	final int FIRE_RATE = 20;
 	void shoot(float angle) {
 		if(cooldown == 0) {
-			//shoot
+			Game.room.objs.add(new Bullet(x, y, angle));
 			cooldown = FIRE_RATE;
 		}
 	}
 	
 	@Override
-	void collision(Type type) {
-		switch(type) {
-		case HAZARD:
+	void takeDamage() {
+		Game.gameOver();
+	}
+	
+	@Override
+	void collision(Object obj) {
+		super.collision(obj);
+		switch(obj.type()) {
+		case ENEMY:
 			Game.gameOver();
 			break;
 		default:

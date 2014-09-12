@@ -28,7 +28,7 @@ public class Room {
 	
 	void update() {
 		for(Object obj : objs) {
-			obj.update();
+			if(obj.isAlive) { obj.update(); }
 		}
 		for(int i = objs.size() - 1; i >= 0; i--) {
 			if(!objs.get(i).isAlive) { objs.remove(i); }

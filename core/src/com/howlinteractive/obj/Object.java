@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Object implements Comparable<Object> {
 
-	enum Type { NONE, SOLID, HAZARD, PLAYER }
+	enum Type { NONE, SOLID, PLAYER, ENEMY, FRIENDLY }
 	abstract Type type();
 	
 	Sprite sprite;
@@ -44,6 +44,10 @@ public abstract class Object implements Comparable<Object> {
 		}
 	}
 	
+	void takeDamage() {
+		isAlive = false;
+	}
+	
 	boolean isColliding(Object obj) {
 		return  x - w / 2 < obj.x + w / 2 &&
 				x + w / 2 > obj.x - w / 2 &&
@@ -64,14 +68,14 @@ public abstract class Object implements Comparable<Object> {
 	void handleCollisions() {
 		ArrayList<Object> collisions = getCollisions();
 		for(Object obj : collisions) {
-			collision(obj.type());
+			collision(obj);
 		}
 	}
 	
 	/**call super.collision(type) for solid collisions**/
 	@SuppressWarnings("incomplete-switch")
-	void collision(Type type) {
-		switch(type) {
+	void collision(Object obj) {
+		switch(obj.type()) {
 		case SOLID:
 			solidCollision();
 			break;
