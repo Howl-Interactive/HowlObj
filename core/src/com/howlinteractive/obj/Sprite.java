@@ -43,7 +43,7 @@ public class Sprite {
 	}
 	
 	void draw(float x, float y, int w, int h) {
-		Game.sB.draw(texture, x, y, w / 2, h / 2, w, h, 1, 1, rotation, 0, 0, w, h, false, false);
+		Game.sB.draw(texture, x, y, w / 2, h / 2, w, h, 1, 1, (float)Math.toDegrees(-rotation), 0, 0, w, h, false, false);
 		if(cycling) { changeTexture((curTexture + 1) % textures.size()); }
 	}
 	

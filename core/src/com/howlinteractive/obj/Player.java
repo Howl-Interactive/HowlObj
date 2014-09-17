@@ -13,6 +13,8 @@ public class Player extends Object {
 	void update() {
 		if(cooldown != 0) { cooldown--; }
 		super.update();
+		velX = 0;
+		velY = 0;
 	}
 	
 	int cooldown = 0;

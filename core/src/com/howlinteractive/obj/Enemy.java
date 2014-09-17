@@ -10,6 +10,12 @@ public class Enemy extends Object {
 	}
 	
 	@Override
+	void update() {
+		setVel((float)Math.atan2(Room.p.y - y, Room.p.x - x), true);
+		super.update();
+	}
+	
+	@Override
 	void collision(Object obj) {
 		super.collision(obj);
 		switch(obj.type()) {

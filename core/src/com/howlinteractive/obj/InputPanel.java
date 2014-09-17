@@ -6,7 +6,7 @@ public class InputPanel {
 
 	enum INPUT_TYPE { MOVE, SHOOT }
 	
-	private static float lx, ly, rx, ry, ls, rs;
+	private static float lx = 50, ly = 50, rx = Game.width - 50, ry = 50, ls = 50, rs = 50;
 	
 	private static ControlStick leftStick, rightStick;
 	
@@ -24,9 +24,9 @@ public class InputPanel {
 		rightStick.draw();
 	}
 	
-	static void handleInput() {
-		leftStick.handleInput();
-		rightStick.handleInput();
+	static void onTouch() {
+		leftStick.onTouch();
+		rightStick.onTouch();
 	}
 	
 	private static class ControlStick {
@@ -48,12 +48,12 @@ public class InputPanel {
 			Game.sB.draw(texture, x - s / 2, y - s / 2, s, s);
 		}
 		
-		void handleInput() {
+		void onTouch() {
 			if(isPressed()) {
 				float angle = getAngle();
 				switch(inputType) {
 				case MOVE:
-					Room.p.setDir(angle, true);
+					Room.p.setVel(angle, true);
 					break;
 				case SHOOT:
 					Room.p.shoot(angle);

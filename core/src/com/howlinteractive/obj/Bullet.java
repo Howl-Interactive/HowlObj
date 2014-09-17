@@ -7,7 +7,7 @@ public class Bullet extends Object {
 	
 	Bullet(float x, float y, float angle) {
 		super(x, y, new Sprite("bullet.png"));
-		setDir(angle, true);
+		setVel(angle, true);
 	}
 	
 	@Override

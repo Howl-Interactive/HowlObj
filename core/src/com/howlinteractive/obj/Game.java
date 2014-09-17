@@ -24,20 +24,23 @@ public class Game extends ApplicationAdapter {
 	static void nextRoom() { curRoom++; room = rooms.get(curRoom); }
 	static void changeRoom(int nextRoom) { curRoom = nextRoom; room = rooms.get(curRoom); }
 	
+	static boolean inputPanelEnabled = true;
+	
 	@Override
 	public void create () {
 		sB = new SpriteBatch();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
 		rooms = new ArrayList<Room>();
-		rooms.add(new Room());
+		rooms.add(new Room(0, -2));
 		changeRoom(0);
 		InputPanel.create();
 	}
 	
 	void handleInput() {
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-			room.onTouch();
+			if(!inputPanelEnabled) { room.onTouch(); }			
+			else { InputPanel.onTouch(); }
 		}
 	}
 
@@ -46,10 +49,11 @@ public class Game extends ApplicationAdapter {
 	}
 	
 	void draw() {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sB.begin();
 		room.draw();
+		if(inputPanelEnabled) { InputPanel.draw(); }
 		sB.end();
 	}
 	
