@@ -5,8 +5,10 @@ public class Enemy extends Object {
 	@Override
 	Type type() { return Type.ENEMY; }
 	
+	static final float SPEED = 3;
+	
 	Enemy(float x, float y) {
-		super(x, y, new Sprite("enemy.png"));
+		super(x, y, SPEED, new Sprite("enemy.png"));
 	}
 	
 	@Override

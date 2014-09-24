@@ -12,7 +12,7 @@ public class Room {
 	
 	float scrollX, scrollY;
 	
-	Room(float playerStartX, float playerStartY, float scrollX, float scrollY) {
+	Room(float scrollX, float scrollY) {
 		this.scrollX = scrollX;
 		this.scrollY = scrollY;
 		objs = new ArrayList<Object>();
@@ -21,12 +21,17 @@ public class Room {
 		initializeEmptyRoom();
 	}
 
-	Room(float scrollX, float scrollY) {
-		this(playerStartX, playerStartY, scrollX, scrollY);
-	}
-	
 	Room() {
-		this(playerStartX, playerStartY, 0, 0);
+		this(0, 0);
+	}
+
+	void reset() {
+		objs = new ArrayList<Object>();
+		p.x = playerStartX;
+		p.y = playerStartY;
+		p.setDir(0, true);
+		objs.add(p);
+		initializeEmptyRoom();
 	}
 	
 	void update() {

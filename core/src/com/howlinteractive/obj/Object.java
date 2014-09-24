@@ -127,7 +127,7 @@ public abstract class Object implements Comparable<Object> {
 	}
 	
 	void setVel(float angle, boolean adjustRotation) {
-		setVel(DEFAULT_SPEED, angle, adjustRotation);
+		setVel(speed, angle, adjustRotation);
 	}
 	
 	void adjustRotation() {

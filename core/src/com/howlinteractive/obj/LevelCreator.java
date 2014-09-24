@@ -17,7 +17,7 @@ public class LevelCreator {
 	static final String EMPTY_SECTION = "0000000000000000000000000000000000000000000000000000000000000000";
 	
 	static String[] sections = {
-		"0000000000000000000000000000000000000000000000000000000000000000"
+		"0000000000000000000000000030000000000000000000000000000000000000"
 	};
 
 	static String[] backgroundFiles = {
@@ -71,6 +71,7 @@ public class LevelCreator {
 	}
 	
 	static ArrayList<Object> initializeEmptyRoom() {
+		scrollCounter = HEIGHT;
 		ArrayList<Object> objs = new ArrayList<Object>();
 		ArrayList<Object> temp = new ArrayList<Object>();
 		int numRooms = (int)Math.ceil(Game.height / (float)HEIGHT);
