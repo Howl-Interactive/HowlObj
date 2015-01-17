@@ -20,6 +20,8 @@ public class Game extends ApplicationAdapter {
 	
 	static int width;
 	static int height;
+	private static int trueWidth;
+	private static int trueHeight;
 	
 	static ArrayList<Room> rooms;
 	static private int curRoom;
@@ -36,9 +38,12 @@ public class Game extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		width = Gdx.graphics.getWidth();
-		height = Gdx.graphics.getHeight();
-		camera = new OrthographicCamera(width, height);
+		width = 540;
+		height = 960;
+		trueWidth = Gdx.graphics.getWidth();
+		trueHeight = Gdx.graphics.getHeight();
+		camera = new OrthographicCamera(trueWidth * 2, trueHeight * 2);
+		camera.zoom = .5f;
 		camera.setToOrtho(false);
 		sB = new SpriteBatch();
 		rooms = new ArrayList<Room>();

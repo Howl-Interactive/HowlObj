@@ -1,1 +1,7 @@
-TODO:
+TO START A NEW PROJECT
+	Create new LibGDX project
+	Delete initial Game file in project-core/src/com.package.name
+	Copy all files from HowlObj-core/src/com.howlinteractive.obj to com.package.name
+	Copy all files from HowlObj-android/assets/ to project-android/assets
+	Add config.width = 540;	config.height = 960; to project-desktop/src/com.package.name.desktop/DesktopLauncher.java (line 10)
+	Possibly add local.properties file from HowlObj/ to project/ (for git problems)
